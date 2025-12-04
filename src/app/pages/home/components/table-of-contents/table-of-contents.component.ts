@@ -11,86 +11,92 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
          [class.fixed-toc]="isFixed" 
          [style.top.px]="isFixed ? fixedTopPosition : null"
          [style.width.px]="isFixed ? containerWidth : null">
-      <div class="gradient-card p-3 md:p-4 rounded-xl border border-[#06e9bb]/10 bg-gradient-to-b from-[#110d28]/50 to-[#110d28]/30 backdrop-blur-sm w-full transition-all duration-300"
+      <div class="gradient-card p-4 md:p-5 rounded-xl border border-[#06e9bb]/10 bg-gradient-to-b from-[#110d28]/50 to-[#110d28]/30 backdrop-blur-sm w-full transition-all duration-300"
            [class.shadow-xl]="isFixed"
            [class.border-[#06e9bb]/30]="isFixed"
            [class.scale-[0.98]]="isFixed">
         
-        <!-- Compact Header -->
-        <div class="flex items-center justify-between mb-3 pb-2 border-b border-[#06e9bb]/10">
+        <!-- Minimalist Header -->
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#06e9bb]/10">
           <div class="flex items-center gap-2">
-            <div class="w-1.5 h-1.5 rounded-full bg-[#06e9bb] animate-pulse"></div>
-            <h3 class="font-medium text-xs uppercase tracking-wider text-[#06e9bb]">
-              Contents
+            <div class="w-2 h-2 rounded-full bg-[#06e9bb] animate-pulse"></div>
+            <h3 class="font-semibold text-sm uppercase tracking-widest text-[#06e9bb]">
+              Navigation
             </h3>
           </div>
           
-          <!-- Small Progress Circle -->
-          <div class="relative w-6 h-6">
+          <!-- Progress Circle -->
+          <div class="relative w-8 h-8">
             <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="15" fill="none" class="stroke-[#06e9bb]/10" stroke-width="1.5"/>
-              <circle cx="18" cy="18" r="15" fill="none" class="stroke-[#06e9bb]" stroke-width="1.5" 
+              <circle cx="18" cy="18" r="16" fill="none" class="stroke-[#06e9bb]/10" stroke-width="2"/>
+              <circle cx="18" cy="18" r="16" fill="none" class="stroke-[#06e9bb]" stroke-width="2" 
                       stroke-dasharray="100" [style.stroke-dashoffset]="100 - scrollProgress"/>
             </svg>
-            <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-[#06e9bb]">
+            <span class="absolute inset-0 flex items-center justify-center text-xs font-bold text-[#06e9bb]">
               {{scrollProgress}}
             </span>
           </div>
         </div>
 
-        <!-- Compact Sections List -->
-        <nav class="space-y-0.5">
+        <!-- Minimalist Sections List -->
+        <nav class="space-y-1 overflow-y-auto pr-1">
           @for (item of sections; track item.id; let i = $index) {
             <a 
               [href]="'#' + item.id" 
-              class="block relative pl-2.5 py-1.5 rounded-lg transition-all duration-150 group"
-              [class.bg-[#06e9bb]/5]="activeSectionId === item.id"
-              [class.border-l]="activeSectionId === item.id"
+              class="block relative pl-3 py-2.5 rounded-lg transition-all duration-200 group"
+              [class.bg-gradient-to-r]="activeSectionId === item.id"
+              [class.from-[#06e9bb]/10]="activeSectionId === item.id"
+              [class.to-[#06e9bb]/5]="activeSectionId === item.id"
+              [class.border-l-2]="activeSectionId === item.id"
               [class.border-[#06e9bb]]="activeSectionId === item.id"
               (click)="onSectionClick($event, item.id)"
             >
-              <div class="flex items-start gap-2">
+              <!-- Number Indicator -->
+              <!--
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span class="text-xs font-mono text-[#06e9bb] bg-[#110d28] px-1.5 py-0.5 rounded border border-[#06e9bb]/30">
+                  {{(i + 1).toString().padStart(2, '0')}}
+                </span>
+              </div>
+              -->
+              
+              <div class="flex items-start gap-3">
                 <!-- Minimal Dot -->
-                <div class="flex-shrink-0 mt-1.5">
-                  <div class="w-1 h-1 rounded-full transition-all duration-200"
+                <div class="flex-shrink-0 mt-2">
+                  <div class="w-1.5 h-1.5 rounded-full transition-all duration-300"
                        [class.bg-[#06e9bb]]="activeSectionId === item.id"
-                       [class.bg-gray-500]="activeSectionId !== item.id"
+                       [class.bg-gray-600]="activeSectionId !== item.id"
                        [class.group-hover:bg-[#06e9bb]]="activeSectionId !== item.id"
-                       [class.group-hover:scale-110]="activeSectionId !== item.id">
+                       [class.group-hover:scale-125]="activeSectionId !== item.id">
                   </div>
                 </div>
                 
-                <!-- Compact Section Title -->
+                <!-- Section Title -->
                 <div class="flex-1 min-w-0">
-                  <span class="text-xs text-gray-400 group-hover:text-white transition-colors duration-150 line-clamp-2 leading-tight"
+                  <span class="text-sm text-gray-400 group-hover:text-white transition-colors duration-200 line-clamp-2 leading-relaxed"
                         [class.text-white]="activeSectionId === item.id"
                         [class.font-medium]="activeSectionId === item.id">
                     {{item.title}}
                   </span>
                 </div>
               </div>
+              
+              <!-- Hover Line Effect -->
+              <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#06e9bb] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
             </a>
           }
         </nav>
 
-        <!-- Small Fixed State Indicator -->
-        <div class="mt-3 pt-2 border-t border-[#06e9bb]/10" *ngIf="isFixed">
-          <div class="flex items-center justify-between text-[10px]">
-            <span class="text-gray-500 flex items-center gap-1">
-              <svg class="w-2.5 h-2.5 text-[#06e9bb]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-              Pinned
-            </span>
-            <button class="text-[#06e9bb] hover:text-white transition-colors flex items-center gap-0.5 group"
-                    (click)="scrollToTop()">
-              <span class="text-[10px]">Top</span>
-              <svg class="w-2.5 h-2.5 transform group-hover:-translate-y-0.5 transition-transform" 
-                   fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/>
-              </svg>
-            </button>
-          </div>
+        <!-- Fixed State - Only Scroll to Top Button -->
+        <div class="mt-4 pt-4 border-t border-[#06e9bb]/10 flex justify-end" *ngIf="isFixed">
+          <button class="text-xs text-[#06e9bb] hover:text-white transition-colors flex items-center gap-1 group"
+                  (click)="scrollToTop()">
+            <span>Scroll to Top</span>
+            <svg class="w-3 h-3 transform group-hover:-translate-y-0.5 transition-transform" 
+                 fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -104,8 +110,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
       position: fixed;
       z-index: 40;
       animation: slideDown 0.3s ease-out;
-      max-height: calc(100vh - 140px) !important;
-      overflow-y: auto;
     }
     
     @keyframes slideDown {
@@ -119,29 +123,28 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
       }
     }
     
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(6, 233, 187, 0.2);
+      border-radius: 2px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(6, 233, 187, 0.4);
+    }
+    
     .line-clamp-2 {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-    }
-
-    /* Custom scrollbar for fixed TOC */
-    .fixed-toc::-webkit-scrollbar {
-      width: 1px;
-    }
-    
-    .fixed-toc::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    
-    .fixed-toc::-webkit-scrollbar-thumb {
-      background: rgba(6, 233, 187, 0.1);
-      border-radius: 1px;
-    }
-    
-    .fixed-toc::-webkit-scrollbar-thumb:hover {
-      background: rgba(6, 233, 187, 0.2);
     }
 
     /* Responsive styles for TOC */
@@ -150,7 +153,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
         position: static !important;
         width: 100% !important;
         top: auto !important;
-        max-height: none !important;
       }
     }
   `]
@@ -163,13 +165,12 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
   scrollProgress: number = 0;
   isFixed: boolean = false;
   containerWidth: number = 0;
-  fixedTopPosition: number = 100;
-  
+  fixedTopPosition: number = 100; // Default top position when fixed
   private scrollListener: any;
   private resizeListener: any;
   private initialOffsetTop: number = 0;
-  private readonly mobileBreakpoint: number = 1024;
-  private resizeTimer: any;
+  private readonly headerHeight: number = 80; // Approximate header height
+  private readonly mobileBreakpoint: number = 1024; // lg breakpoint
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -187,6 +188,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      // Calculate initial position after view is rendered
       setTimeout(() => {
         this.calculateInitialPosition();
         this.calculateContainerWidth();
@@ -217,22 +219,26 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
   @HostListener('window:resize')
   onWindowResize(): void {
     if (isPlatformBrowser(this.platformId)) {
+      // Debounce resize events
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
         this.calculateInitialPosition();
         this.calculateContainerWidth();
         this.calculateHeaderHeight();
+        // Re-check fixed state after resize
         this.updateFixedState();
       }, 150);
     }
   }
+
+  private resizeTimer: any;
 
   private calculateHeaderHeight(): void {
     if (isPlatformBrowser(this.platformId)) {
       const header = document.querySelector('app-header');
       if (header) {
         const headerRect = header.getBoundingClientRect();
-        this.fixedTopPosition = headerRect.height + 16;
+        this.fixedTopPosition = headerRect.height + 20; // Header height + 20px margin
       }
     }
   }
@@ -285,7 +291,9 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
       const scrollY = window.scrollY || document.documentElement.scrollTop;
       const windowWidth = window.innerWidth;
       
+      // Only fix on large screens (lg breakpoint and above)
       if (windowWidth >= this.mobileBreakpoint) {
+        // Check if we've scrolled past the TOC's original position
         const shouldBeFixed = scrollY > this.initialOffsetTop - this.fixedTopPosition;
         
         if (shouldBeFixed !== this.isFixed) {
@@ -295,6 +303,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
           }
         }
       } else {
+        // On mobile/tablet, never use fixed positioning
         this.isFixed = false;
       }
     }
@@ -303,10 +312,12 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
   private updateActiveSection(): void {
     if (!this.sections || this.sections.length === 0) return;
 
-    const scrollPosition = window.scrollY + 100;
+    const scrollPosition = window.scrollY + 120; // Increased offset for better detection
 
+    // Reset active section
     this.activeSectionId = '';
 
+    // Find the active section
     for (let i = this.sections.length - 1; i >= 0; i--) {
       const section = document.getElementById(this.sections[i].id);
       if (section) {
@@ -314,19 +325,23 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
         const sectionHeight = section.offsetHeight;
         const sectionBottom = sectionTop + sectionHeight;
         
+        // Check if current scroll position is within this section
         if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
           this.activeSectionId = this.sections[i].id;
           return;
         }
         
-        if (i === this.sections.length - 1 && scrollPosition >= sectionBottom - 80) {
+        // If we're at the bottom of the page, select the last section
+        if (i === this.sections.length - 1 && 
+            scrollPosition >= sectionBottom - 100) {
           this.activeSectionId = this.sections[i].id;
           return;
         }
       }
     }
 
-    if (scrollPosition < 150 && this.sections.length > 0) {
+    // If no section found and we're at the top, select the first section
+    if (scrollPosition < 200 && this.sections.length > 0) {
       this.activeSectionId = this.sections[0].id;
     }
   }
@@ -345,19 +360,22 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
     this.sectionClick.emit({ event, sectionId });
     this.activeSectionId = sectionId;
     
+    // Smooth scroll to section
     if (isPlatformBrowser(this.platformId)) {
       const element = document.getElementById(sectionId);
       if (element) {
+        // Calculate proper offset considering header
         const header = document.querySelector('app-header');
-        const headerHeight = header ? header.clientHeight : 80;
+        const headerHeight = header ? header.clientHeight : this.headerHeight;
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 16;
+        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
 
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
         });
 
+        // Update URL hash without jumping
         history.replaceState(null, '', `#${sectionId}`);
       }
     }
