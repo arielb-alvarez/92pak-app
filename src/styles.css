@@ -1,3 +1,137 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* src/styles.css */
 @import "tailwindcss";
+
+/* Custom color palette */
+:root {
+  color-scheme: dark;
+  --color-primary: #06e9bb;
+  --color-secondary: #110d28;
+  --color-accent: #06e9bb;
+}
+
+body {
+  @apply bg-[#110d28] text-gray-100;
+}
+
+/* Custom styles with new palette */
+.prose {
+  max-width: none;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  @apply text-gray-300;
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  @apply text-white;
+}
+
+.sticky {
+  position: sticky;
+}
+
+/* Gradient backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, #110d28 0%, #1a1442 50%, #110d28 100%);
+}
+
+.gradient-card {
+  background: linear-gradient(135deg, #1a1442 0%, #110d28 100%);
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply bg-[#06e9bb] text-[#110d28] font-bold py-3 px-6 rounded-xl hover:bg-[#05d4a8] transition-all transform hover:scale-105;
+}
+
+.btn-secondary {
+  @apply bg-transparent border-2 border-[#06e9bb] text-[#06e9bb] font-bold py-3 px-6 rounded-xl hover:bg-[#06e9bb] hover:text-[#110d28] transition-all;
+}
+
+/* Additional styles for better SVG and card appearance */
+svg {
+  flex-shrink: 0;
+}
+
+.gradient-card {
+  background: linear-gradient(135deg, rgba(26, 20, 66, 0.8) 0%, rgba(17, 13, 40, 0.9) 100%);
+  backdrop-filter: blur(10px);
+}
+
+/* Ensure images are properly contained */
+img {
+  max-width: 100%;
+}
+
+/* Ensure TOC text stays on one line */
+.toc-item {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Better responsiveness for TOC */
+@media (min-width: 1024px) {
+  .toc-container {
+    min-width: 320px;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .toc-container {
+    min-width: 360px;
+    max-width: 450px;
+  }
+}
+
+/* Prevent text wrapping in TOC */
+.whitespace-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+/* Ensure content sections take full width */
+.content-section > section {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Remove any max-width constraints from content sections */
+.gradient-card {
+  width: 100% !important;
+}
+
+/* Fix for images taking full width */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure grids take full width */
+.grid {
+  width: 100%;
+}
