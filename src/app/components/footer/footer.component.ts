@@ -16,14 +16,16 @@ import { ConfigService } from '../../services/config.service';
           <!-- Brand Info -->
           <div class="flex items-center gap-3">
             <div class="bg-white/5 backdrop-blur-md rounded-xl p-2 border border-[#06e9bb]/20">
-              <img 
-                src="assets/images/92pak-game-logo-official-2025.png" 
-                alt="92 PAK Game Logo"
-                class="w-8 h-8 md:w-10 md:h-10"
-              >
+              <picture>
+                <source srcset="assets/images/92pak-game-logo-sm-2025.webp" type="image/webp">
+                <img 
+                  src="assets/images/92pak-game-logo-sm-2025.png" 
+                  alt="92 PAK Game Logo"
+                  class="w-8 h-8 md:w-10 md:h-10"
+                >
+              </picture>
             </div>
             <div>
-              <h3 class="text-base md:text-lg font-bold text-white">{{config?.app?.name || '92PAK'}}</h3>
               <p class="text-xs md:text-sm text-gray-400">Real Money Earning App</p>
             </div>
           </div>
@@ -40,7 +42,7 @@ import { ConfigService } from '../../services/config.service';
           <!-- Copyright -->
           <div class="text-center">
             <p class="text-gray-400 text-sm">
-              &copy; {{currentYear}} {{config?.app?.name || '92 PAK Game'}}
+              &copy; {{currentYear}} 92 PAK Game
             </p>
           </div>
         </div>

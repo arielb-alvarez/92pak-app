@@ -14,16 +14,20 @@ import { ConfigService } from '../../services/config.service';
         <div class="flex items-center justify-between">
           <!-- Logo -->
           <a [routerLink]="['/']" class="flex items-center gap-3">
-            <div class="bg-white/5 backdrop-blur-md rounded-xl p-2 border border-[#06e9bb]/20">
-              <img 
-                src="assets/images/92pak-game-logo-official-2025.png" 
-                alt="92 PAK Game Logo"
-                class="w-10 h-10"
-              >
-            </div>
-            <div>
-              <h1 class="text-xl font-bold text-white">{{appInfo?.name || '92PAK'}}</h1>
-              <p class="text-xs text-[#06e9bb]">Real Money Earning App</p>
+            <div class="flex items-center gap-3">
+              <div class="bg-white/5 backdrop-blur-md rounded-xl p-2 border border-[#06e9bb]/20">
+                <picture>
+                  <source srcset="assets/images/92pak-game-logo-sm-2025.webp" type="image/webp">
+                  <img 
+                    src="assets/images/92pak-game-logo-sm-2025.png" 
+                    alt="92 PAK Game Logo"
+                    class="w-10 h-10"
+                  >
+                </picture>
+              </div>
+              <div>
+                <p class="text-xs text-[#06e9bb]">Real Money Earning App</p>
+              </div>
             </div>
           </a>
 
