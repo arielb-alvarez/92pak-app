@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex-1 w-full max-w-md" *ngIf="appInfo">
+    <div class="flex-1 w-full" *ngIf="appInfo">
       <div class="grid grid-cols-2 gap-4">
         <!-- App Name -->
         <div class="gradient-card p-4 rounded-xl border border-[#06e9bb]/20 hover:border-[#06e9bb]/40 transition-all duration-300">
