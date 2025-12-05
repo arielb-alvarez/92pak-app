@@ -7,54 +7,63 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section id="advanced-earning-strategies" class="gradient-card p-8 rounded-xl shadow-lg border border-[#06e9bb]/20 mb-8" *ngIf="earningStrategies.length > 0">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-[#06e9bb] mb-4">Advanced Earning Strategies: Partner Rewards Program</h2>
-        <p class="text-gray-300 mb-6">Unlock the full potential of {{appInfo?.name || '92 PAK Game'}} with these proven strategies that top earners use daily</p>
+    <section id="advanced-earning-strategies" class="gradient-card p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg border border-[#06e9bb]/20 mb-8" *ngIf="earningStrategies.length > 0">
+      <div class="text-center mb-8 lg:mb-10">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#06e9bb] mb-4">Advanced Earning Strategies: Partner Rewards Program</h2>
+        <p class="text-gray-300 mb-6 px-2 sm:px-0">Unlock the full potential of {{appInfo?.name || '92 PAK Game'}} with these proven strategies that top earners use daily</p>
         
-        <!-- Stats Banner -->
-        <div class="inline-flex items-center gap-4 px-6 py-3 bg-gradient-to-r from-[#06e9bb]/10 to-[#06e9bb]/5 rounded-full border border-[#06e9bb]/20 mb-8">
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#06e9bb]" fill="currentColor" viewBox="0 0 24 24">
+        <!-- Stats Banner - Updated with responsive design -->
+        <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 px-4 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-[#06e9bb]/10 to-[#06e9bb]/5 rounded-full border border-[#06e9bb]/20 mb-8 max-w-full overflow-hidden">
+          <!-- Stat 1 -->
+          <div class="flex items-center gap-2 px-2 sm:px-0">
+            <svg class="w-5 h-5 text-[#06e9bb] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-            <span class="text-white font-semibold">Top 5%</span>
+            <span class="text-white font-semibold text-sm sm:text-base whitespace-nowrap">Top 5%</span>
           </div>
-          <span class="text-gray-400">|</span>
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#06e9bb]" fill="currentColor" viewBox="0 0 24 24">
+          
+          <!-- Vertical Separator - Hide on mobile -->
+          <span class="text-gray-400 hidden sm:inline">|</span>
+          
+          <!-- Stat 2 -->
+          <div class="flex items-center gap-2 px-2 sm:px-0">
+            <svg class="w-5 h-5 text-[#06e9bb] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-            <span class="text-white font-semibold">+PKR 50K/Month</span>
+            <span class="text-white font-semibold text-sm sm:text-base whitespace-nowrap">+PKR 50K/Month</span>
           </div>
-          <span class="text-gray-400">|</span>
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#06e9bb]" fill="currentColor" viewBox="0 0 24 24">
+          
+          <!-- Vertical Separator - Hide on mobile -->
+          <span class="text-gray-400 hidden sm:inline">|</span>
+          
+          <!-- Stat 3 -->
+          <div class="flex items-center gap-2 px-2 sm:px-0">
+            <svg class="w-5 h-5 text-[#06e9bb] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-            <span class="text-white font-semibold">1,200+ Partners</span>
+            <span class="text-white font-semibold text-sm sm:text-base whitespace-nowrap">1,200+ Partners</span>
           </div>
         </div>
       </div>
 
       <!-- Strategy Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         @for (strategy of earningStrategies; track strategy.title; let i = $index) {
           <div class="relative group">
             <!-- Background Gradient Effect -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#06e9bb]/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
             <!-- Strategy Card -->
-            <div class="relative bg-[#1a1442] border border-[#06e9bb]/20 rounded-xl p-6 hover:border-[#06e9bb]/40 hover:transform hover:-translate-y-1 transition-all duration-300 h-full">
+            <div class="relative bg-[#1a1442] border border-[#06e9bb]/20 rounded-xl p-4 sm:p-6 hover:border-[#06e9bb]/40 hover:transform hover:-translate-y-1 transition-all duration-300 h-full">
               <!-- Strategy Number -->
-              <div class="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-[#06e9bb] to-[#00d4aa] rounded-full flex items-center justify-center text-[#110d28] font-bold text-lg shadow-lg shadow-[#06e9bb]/30">
+              <div class="absolute -top-3 -left-3 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-[#06e9bb] to-[#00d4aa] rounded-full flex items-center justify-center text-[#110d28] font-bold text-sm sm:text-lg shadow-lg shadow-[#06e9bb]/30">
                 {{i + 1}}
               </div>
               
               <!-- Strategy Icon - Fixed with SVG -->
               <div class="mb-4">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-[#06e9bb]/10 to-[#06e9bb]/5 border border-[#06e9bb]/20 group-hover:scale-110 transition-transform duration-300">
-                  <div class="w-8 h-8 text-[#06e9bb]">
+                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-[#06e9bb]/10 to-[#06e9bb]/5 border border-[#06e9bb]/20 group-hover:scale-110 transition-transform duration-300">
+                  <div class="w-6 h-6 sm:w-8 sm:h-8 text-[#06e9bb]">
                     @switch(i % 6) {
                       @case(0) {
                         <!-- Referral Icon -->
@@ -98,26 +107,26 @@ import { CommonModule } from '@angular/common';
               </div>
               
               <!-- Strategy Title -->
-              <h3 class="font-bold text-xl mb-3 text-white group-hover:text-[#06e9bb] transition-colors">{{strategy.title}}</h3>
+              <h3 class="font-bold text-lg sm:text-xl mb-3 text-white group-hover:text-[#06e9bb] transition-colors">{{strategy.title}}</h3>
               
               <!-- Strategy Description -->
-              <p class="text-gray-300 mb-4">{{strategy.description}}</p>
+              <p class="text-gray-300 mb-4 text-sm sm:text-base">{{strategy.description}}</p>
               
               <!-- Earning Potential -->
               <div class="flex items-center justify-between mt-4 pt-4 border-t border-[#06e9bb]/10">
                 <div class="flex items-center gap-2">
-                  <svg class="w-5 h-5 text-[#06e9bb]" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#06e9bb]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
                   </svg>
-                  <span class="text-sm text-gray-400">Earning Potential:</span>
+                  <span class="text-xs sm:text-sm text-gray-400">Earning Potential:</span>
                 </div>
-                <span class="text-[#06e9bb] font-bold">{{strategy.earningPotential}}</span>
+                <span class="text-[#06e9bb] font-bold text-sm sm:text-base">{{strategy.earningPotential}}</span>
               </div>
               
               <!-- Difficulty Level -->
               <div class="flex items-center gap-2 mt-3">
                 @for (star of getStars(strategy.difficulty); track $index) {
-                  <svg class="w-4 h-4" [ngClass]="star === 'full' ? 'text-[#06e9bb]' : 'text-gray-600'" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4" [ngClass]="star === 'full' ? 'text-[#06e9bb]' : 'text-gray-600'" fill="currentColor" viewBox="0 0 24 24">
                     @if (star === 'full') {
                       <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                     } @else {
@@ -132,10 +141,10 @@ import { CommonModule } from '@angular/common';
               @if (strategy.tip) {
                 <div class="mt-4 p-3 bg-[#06e9bb]/5 rounded-lg border border-[#06e9bb]/10">
                   <div class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-[#06e9bb] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#06e9bb] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
                     </svg>
-                    <p class="text-sm text-[#06e9bb]">{{strategy.tip}}</p>
+                    <p class="text-xs sm:text-sm text-[#06e9bb]">{{strategy.tip}}</p>
                   </div>
                 </div>
               }
@@ -145,40 +154,40 @@ import { CommonModule } from '@angular/common';
       </div>
 
       <!-- Performance Dashboard -->
-      <div class="mt-12 bg-gradient-to-r from-[#1a1442] to-[#110d28] rounded-xl border border-[#06e9bb]/20 p-6">
-        <h3 class="font-bold text-xl mb-6 text-center text-[#06e9bb]">Performance Dashboard: Track Your Earnings</h3>
+      <div class="mt-8 sm:mt-12 bg-gradient-to-r from-[#1a1442] to-[#110d28] rounded-xl border border-[#06e9bb]/20 p-4 sm:p-6 mb-6">
+        <h3 class="font-bold text-lg sm:text-xl mb-4 sm:mb-6 text-center text-[#06e9bb]">Performance Dashboard: Track Your Earnings</h3>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="text-center p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
-            <div class="text-3xl font-bold text-[#06e9bb] mb-2 group-hover:scale-110 transition-transform">6%</div>
-            <div class="text-sm text-gray-300">Referral Commission</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          <div class="text-center p-3 sm:p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
+            <div class="text-xl sm:text-2xl lg:text-3xl font-bold text-[#06e9bb] mb-1 sm:mb-2 group-hover:scale-110 transition-transform">6%</div>
+            <div class="text-xs sm:text-sm text-gray-300">Referral Commission</div>
           </div>
           
-          <div class="text-center p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
-            <div class="text-3xl font-bold text-[#06e9bb] mb-2 group-hover:scale-110 transition-transform">PKR 500+</div>
-            <div class="text-sm text-gray-300">Daily Average</div>
+          <div class="text-center p-3 sm:p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
+            <div class="text-xl sm:text-2xl lg:text-3xl font-bold text-[#06e9bb] mb-1 sm:mb-2 group-hover:scale-110 transition-transform">PKR 500+</div>
+            <div class="text-xs sm:text-sm text-gray-300">Daily Average</div>
           </div>
           
-          <div class="text-center p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
-            <div class="text-3xl font-bold text-[#06e9bb] mb-2 group-hover:scale-110 transition-transform">Instant</div>
-            <div class="text-sm text-gray-300">Withdrawal Time</div>
+          <div class="text-center p-3 sm:p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
+            <div class="text-xl sm:text-2xl lg:text-3xl font-bold text-[#06e9bb] mb-1 sm:mb-2 group-hover:scale-110 transition-transform">Instant</div>
+            <div class="text-xs sm:text-sm text-gray-300">Withdrawal Time</div>
           </div>
           
-          <div class="text-center p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
-            <div class="text-3xl font-bold text-[#06e9bb] mb-2 group-hover:scale-110 transition-transform">24/7</div>
-            <div class="text-sm text-gray-300">Support Available</div>
+          <div class="text-center p-3 sm:p-4 bg-[#110d28] rounded-lg group hover:bg-[#06e9bb]/10 transition-colors">
+            <div class="text-xl sm:text-2xl lg:text-3xl font-bold text-[#06e9bb] mb-1 sm:mb-2 group-hover:scale-110 transition-transform">24/7</div>
+            <div class="text-xs sm:text-sm text-gray-300">Support Available</div>
           </div>
         </div>
       </div>
 
       <!-- Pro Trader Section -->
-      <div class="mt-12 p-6 bg-gradient-to-r from-[#06e9bb]/10 to-[#06e9bb]/5 rounded-xl border border-[#06e9bb]/20">
-        <div class="flex flex-col md:flex-row items-center gap-6">
+      <div class="mt-8 sm:mt-12 p-4 sm:p-6 bg-gradient-to-r from-[#06e9bb]/10 to-[#06e9bb]/5 rounded-xl border border-[#06e9bb]/20 mb-6">
+        <div class="flex flex-col md:flex-row items-center gap-4 sm:gap-6">
           <!-- Trader Icon -->
           <div class="flex-shrink-0">
             <div class="relative">
-              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#06e9bb] to-[#00d4aa] flex items-center justify-center">
-                <svg class="w-10 h-10 text-[#110d28]" fill="currentColor" viewBox="0 0 24 24">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#06e9bb] to-[#00d4aa] flex items-center justify-center">
+                <svg class="w-8 h-8 sm:w-10 sm:h-10 text-[#110d28]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                   <path d="M22 12h-4v-2h4v2zm-6 4h4v2h-4v-2zm4-8h-4v2h4V8z" fill="#110d28" fill-opacity="0.7"/>
                 </svg>
@@ -190,50 +199,51 @@ import { CommonModule } from '@angular/common';
           </div>
           
           <!-- Trader Content -->
-          <div class="flex-1">
-            <h4 class="font-bold text-lg mb-2 text-white">Pro Trader Insight</h4>
-            <p class="text-gray-300 mb-4">
+          <div class="flex-1 mt-4 md:mt-0">
+            <h4 class="font-bold text-base sm:text-lg mb-2 text-white">Pro Trader Insight</h4>
+            <p class="text-gray-300 mb-4 text-sm sm:text-base">
               "Combining multiple strategies yields the best results. Start with basic games, build your referral network, 
               then diversify into advanced games. Track your daily performance and adjust your strategy accordingly."
             </p>
-            <div class="flex items-center gap-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
               <div>
-                <div class="text-[#06e9bb] font-bold">Ali Hassan</div>
-                <div class="text-sm text-gray-400">Top Earner (PKR 2.5M+)</div>
+                <div class="text-[#06e9bb] font-bold text-sm sm:text-base">Ali Hassan</div>
+                <div class="text-xs sm:text-sm text-gray-400">Top Earner (PKR 2.5M+)</div>
               </div>
               <div class="flex items-center gap-1">
                 @for (star of [1,2,3,4,5]; track $index) {
-                  <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                   </svg>
                 }
-                <span class="text-sm text-gray-400 ml-2">4.9/5</span>
+                <span class="text-xs sm:text-sm text-gray-400 ml-2">4.9/5</span>
               </div>
             </div>
           </div>
           
           <!-- Achievement -->
-          <div class="flex-shrink-0 text-center">
-            <div class="text-4xl font-bold text-[#06e9bb] mb-2">PKR 2.5M+</div>
-            <div class="text-sm text-gray-300">Total Earnings</div>
+          <div class="flex-shrink-0 text-center mt-4 md:mt-0">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#06e9bb] mb-1 sm:mb-2">PKR 2.5M+</div>
+            <div class="text-xs sm:text-sm text-gray-300">Total Earnings</div>
           </div>
         </div>
       </div>
 
       <!-- CTA Buttons -->
-      <div class="mt-10 text-center">
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button class="btn-primary px-8 py-4 text-lg group hover:scale-105 transition-transform" (click)="register.emit()">
+      <div class="mt-8 sm:mt-10 text-center mb-6">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+          <button class="btn-primary px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg group hover:scale-105 transition-transform" (click)="register.emit()">
             <span class="flex items-center justify-center gap-2">
-              <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-              Start Implementing These Strategies Now
+              <span class="hidden sm:inline">Start Implementing These Strategies Now</span>
+              <span class="sm:hidden">Start Implementing Now</span>
             </span>
           </button>
-          <button class="btn-secondary px-8 py-4 text-lg group hover:scale-105 transition-transform" (click)="scrollToSection.emit('expert-tips')">
+          <button class="btn-secondary px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg group hover:scale-105 transition-transform" (click)="scrollToSection.emit('expert-tips')">
             <span class="flex items-center justify-center gap-2">
-              <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
               </svg>
               View Expert Tips

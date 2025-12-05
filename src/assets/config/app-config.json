@@ -3,7 +3,7 @@
     "default": {
       "title": "92 PAK Game Download 2025 - Top Real Money Earning App in Pakistan",
       "description": "🚀 Download 92 PAK Game for Android - Pakistan's #1 real money earning app 2025. Earn daily through color prediction games, lottery & referrals. Instant JazzCash/Easypaisa withdrawals. Secure & Trusted!",
-      "keywords": "92 PAK Game download, real money earning app Pakistan, color prediction game, JazzCash withdrawal, Easypaisa deposit, online earning Pakistan 2025, mobile gaming income, lottery app Pakistan, trusted earning app",
+      "keywords": "92 PAK Game download, real money earning app Pakistan, color prediction game, JazzCash withdrawal, Easypaisa deposit, online earning Pakistan 2025, mobile gaming income, lottery app Pakistan, trusted earning app, earn money online Pakistan, best earning app 2025, mobile casino Pakistan, online betting app, daily earning app, 92 PAK Game APK latest version, 92 PAK Game review, 92 PAK Game referral code, how to earn from 92 PAK Game, instant withdrawal app Pakistan, real cash games Pakistan",
       "type": "article",
       "image": "/assets/images/og-image.webp",
       "siteName": "92 PAK Game - Real Money Earning App",
@@ -13,32 +13,32 @@
       "home": {
         "title": "92 PAK Game Download 2025 - Top Real Money Earning App in Pakistan",
         "description": "🚀 Download 92 PAK Game - Pakistan's fastest growing real money app. Earn through color prediction games, lottery & referrals. Instant JazzCash withdrawals & 24/7 support.",
-        "keywords": "92 PAK Game download, real money app Pakistan, color prediction, JazzCash earning, mobile gaming income, online earning 2025, 92pak game apk, pakistan earning app, real cash games"
+        "keywords": "92 PAK Game download, real money app Pakistan, color prediction, JazzCash earning, mobile gaming income, online earning 2025, 92pak game apk, pakistan earning app, real cash games, 92 PAK Game sign up, 92 PAK Game registration, 92 PAK Game tutorial, earn Rs 1000 daily, best color prediction game Pakistan, trusted online earning app"
       },
       "privacy": {
         "title": "Privacy Policy - 92 PAK Game | Secure Real Money Earning App",
         "description": "92 PAK Game privacy policy - Learn how we protect your data & transactions. Secure encryption for real money gaming app in Pakistan.",
-        "keywords": "92 PAK Game privacy policy, secure earning app, data protection Pakistan, gaming app security"
+        "keywords": "92 PAK Game privacy policy, data protection Pakistan, secure transactions, user data security, privacy policy 2025"
       },
       "about": {
         "title": "About 92 PAK Game - Pakistan's Trusted Real Money Earning Platform",
         "description": "Learn about 92 PAK Game - Pakistan's premier real money earning platform. Our mission, features, and commitment to secure gaming with JazzCash & Easypaisa payments.",
-        "keywords": "about 92 PAK Game, real money platform Pakistan, trusted earning app, company mission"
+        "keywords": "about 92 PAK Game, company information, gaming platform Pakistan, trusted app developer, Pakistani earning platform"
       },
       "contact": {
         "title": "Contact 92 PAK Game Support - 24/7 Real Money App Help",
         "description": "Get 24/7 support for 92 PAK Game real money earning app. Contact via Telegram, WhatsApp, email for instant help with deposits, withdrawals & gaming.",
-        "keywords": "92 PAK Game contact, customer support Pakistan, real money app help, 24/7 support"
+        "keywords": "92 PAK Game contact, customer support Pakistan, help center, technical support, Telegram support, WhatsApp support"
       },
       "disclaimer": {
         "title": "Disclaimer - 92 PAK Game Real Money Earning App",
         "description": "Important disclaimer for 92 PAK Game real money earning app. Read about gaming risks, financial responsibility & legal terms for Pakistani users.",
-        "keywords": "92 PAK Game disclaimer, real money app risks, gaming responsibility Pakistan"
+        "keywords": "92 PAK Game disclaimer, gambling warning Pakistan, responsible gaming, risk disclaimer, terms of service"
       },
       "terms": {
         "title": "Terms & Conditions - 92 PAK Game Real Money Platform",
         "description": "Complete terms & conditions for 92 PAK Game real money earning platform. User guidelines, payment terms & legal policies for Pakistani gamers.",
-        "keywords": "92 PAK Game terms, real money app conditions, user agreement Pakistan"
+        "keywords": "92 PAK Game terms and conditions, user agreement Pakistan, real money app rules, gaming terms Pakistan, deposit terms, withdrawal terms, account rules Pakistan"
       }
     }
   },
@@ -63,14 +63,14 @@
     "support": {
       "telegram": "https://t.me/92pak_support",
       "whatsapp": "https://wa.me/923001234567",
-      "email": "support@92pakgame.com",
+      "email": "support@92pakworld.net",
       "phone": "+92-300-1234567"
     },
     "social": {
-      "facebook": "https://facebook.com/92pakgame",
-      "twitter": "https://twitter.com/92pakgame",
-      "instagram": "https://instagram.com/92pakgame",
-      "youtube": "https://youtube.com/92pakgame"
+      "facebook": "https://facebook.com/92pakworld",
+      "twitter": "https://twitter.com/92pakworld",
+      "instagram": "https://instagram.com/92pakworld",
+      "youtube": "https://youtube.com/92pakworld"
     }
   },
   "content": {
@@ -330,12 +330,15 @@
   },
   "contact": {
     "support": {
-      "telegram": "@92pak_support",
-      "email": "support@92pakgame.com",
+      "telegram": {
+        "@TeacherAaira_92Pak": "https://t.me/TeacherAaira_92Pak",
+        "@TeacherAaira92PAK_bot": "https://t.me/TeacherAaira92PAK_bot"
+      },
+      "email": "support@92pakworld.net",
       "phone": "Available upon request"
     },
     "technical": {
-      "email": "support@92pakgame.com",
+      "email": "support@92pakworld.net",
       "responseTime": "Within 24 hours"
     }
   },
