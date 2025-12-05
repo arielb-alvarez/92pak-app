@@ -51,15 +51,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
               [class.border-[#06e9bb]]="activeSectionId === item.id"
               (click)="onSectionClick($event, item.id)"
             >
-              <!-- Number Indicator -->
-              <!--
-              <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span class="text-xs font-mono text-[#06e9bb] bg-[#110d28] px-1.5 py-0.5 rounded border border-[#06e9bb]/30">
-                  {{(i + 1).toString().padStart(2, '0')}}
-                </span>
-              </div>
-              -->
-              
               <div class="flex items-start gap-3">
                 <!-- Minimal Dot -->
                 <div class="flex-shrink-0 mt-2">
@@ -165,12 +156,14 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
   scrollProgress: number = 0;
   isFixed: boolean = false;
   containerWidth: number = 0;
-  fixedTopPosition: number = 100; // Default top position when fixed
+  fixedTopPosition: number = 100;
+  
   private scrollListener: any;
   private resizeListener: any;
-  private initialOffsetTop: number = 0;
-  private readonly headerHeight: number = 80; // Approximate header height
-  private readonly mobileBreakpoint: number = 1024; // lg breakpoint
+  private resizeTimer: any;
+  private originalTopOffset: number = 0;
+  private readonly headerHeight: number = 80;
+  private readonly mobileBreakpoint: number = 1024;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -188,11 +181,10 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // Calculate initial position after view is rendered
       setTimeout(() => {
-        this.calculateInitialPosition();
+        this.calculateOriginalTopOffset();
         this.calculateContainerWidth();
-      }, 100);
+      }, 300); // Increased delay to ensure layout is stable
     }
   }
 
@@ -203,6 +195,9 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
       }
       if (this.resizeListener) {
         window.removeEventListener('resize', this.resizeListener);
+      }
+      if (this.resizeTimer) {
+        clearTimeout(this.resizeTimer);
       }
     }
   }
@@ -219,26 +214,22 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
   @HostListener('window:resize')
   onWindowResize(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // Debounce resize events
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
-        this.calculateInitialPosition();
+        this.calculateOriginalTopOffset();
         this.calculateContainerWidth();
         this.calculateHeaderHeight();
-        // Re-check fixed state after resize
         this.updateFixedState();
       }, 150);
     }
   }
-
-  private resizeTimer: any;
 
   private calculateHeaderHeight(): void {
     if (isPlatformBrowser(this.platformId)) {
       const header = document.querySelector('app-header');
       if (header) {
         const headerRect = header.getBoundingClientRect();
-        this.fixedTopPosition = headerRect.height + 20; // Header height + 20px margin
+        this.fixedTopPosition = headerRect.height + 20;
       }
     }
   }
@@ -250,11 +241,13 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
 
-  private calculateInitialPosition(): void {
+  private calculateOriginalTopOffset(): void {
     const element = this.elementRef.nativeElement.querySelector('.sticky');
     if (element) {
+      // Get the element's position relative to the document
       const rect = element.getBoundingClientRect();
-      this.initialOffsetTop = rect.top + window.pageYOffset;
+      // This calculates the distance from the top of the document to the element's top
+      this.originalTopOffset = rect.top + window.pageYOffset;
     }
   }
 
@@ -271,7 +264,7 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
     this.resizeListener = () => {
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
-        this.calculateInitialPosition();
+        this.calculateOriginalTopOffset();
         this.calculateContainerWidth();
         this.calculateHeaderHeight();
         this.updateFixedState();
@@ -291,10 +284,14 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
       const scrollY = window.scrollY || document.documentElement.scrollTop;
       const windowWidth = window.innerWidth;
       
-      // Only fix on large screens (lg breakpoint and above)
+      // Only fix on large screens
       if (windowWidth >= this.mobileBreakpoint) {
-        // Check if we've scrolled past the TOC's original position
-        const shouldBeFixed = scrollY > this.initialOffsetTop - this.fixedTopPosition;
+        // Calculate the threshold when TOC should become fixed
+        // We want it to become fixed when it reaches the top of viewport (minus header)
+        const threshold = this.originalTopOffset - this.fixedTopPosition;
+        
+        // Add a small buffer (50px) to prevent premature fixing
+        const shouldBeFixed = scrollY > threshold + 50;
         
         if (shouldBeFixed !== this.isFixed) {
           this.isFixed = shouldBeFixed;
@@ -312,12 +309,10 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
   private updateActiveSection(): void {
     if (!this.sections || this.sections.length === 0) return;
 
-    const scrollPosition = window.scrollY + 120; // Increased offset for better detection
+    const scrollPosition = window.scrollY + 120;
 
-    // Reset active section
     this.activeSectionId = '';
 
-    // Find the active section
     for (let i = this.sections.length - 1; i >= 0; i--) {
       const section = document.getElementById(this.sections[i].id);
       if (section) {
@@ -325,22 +320,18 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
         const sectionHeight = section.offsetHeight;
         const sectionBottom = sectionTop + sectionHeight;
         
-        // Check if current scroll position is within this section
         if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
           this.activeSectionId = this.sections[i].id;
           return;
         }
         
-        // If we're at the bottom of the page, select the last section
-        if (i === this.sections.length - 1 && 
-            scrollPosition >= sectionBottom - 100) {
+        if (i === this.sections.length - 1 && scrollPosition >= sectionBottom - 100) {
           this.activeSectionId = this.sections[i].id;
           return;
         }
       }
     }
 
-    // If no section found and we're at the top, select the first section
     if (scrollPosition < 200 && this.sections.length > 0) {
       this.activeSectionId = this.sections[0].id;
     }
@@ -360,11 +351,9 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
     this.sectionClick.emit({ event, sectionId });
     this.activeSectionId = sectionId;
     
-    // Smooth scroll to section
     if (isPlatformBrowser(this.platformId)) {
       const element = document.getElementById(sectionId);
       if (element) {
-        // Calculate proper offset considering header
         const header = document.querySelector('app-header');
         const headerHeight = header ? header.clientHeight : this.headerHeight;
         const elementPosition = element.getBoundingClientRect().top;
@@ -375,7 +364,6 @@ export class TableOfContentsComponent implements OnInit, AfterViewInit, OnDestro
           behavior: 'smooth'
         });
 
-        // Update URL hash without jumping
         history.replaceState(null, '', `#${sectionId}`);
       }
     }
