@@ -1,0 +1,10 @@
+{
+  "routes": {
+    "/": {},
+    "/about-us": {},
+    "/contact-us": {},
+    "/disclaimer": {},
+    "/privacy-policy": {},
+    "/terms-and-conditions": {}
+  }
+}
