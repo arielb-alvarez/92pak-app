@@ -77,10 +77,10 @@ import { SeoService } from '../../services/seo.service';
                       <span class="mr-2">•</span>
                       <span class="text-gray-300">Email:</span>
                       <a 
-                        href="mailto:support@92pakgame.com" 
+                        href="mailto:92pakworldhelp@gmail.com" 
                         class="ml-1 text-[#06e9bb] hover:underline"
                       >
-                        support@92pakgame.com
+                        support@92pakworld.net
                       </a>
                     </li>
                     <li class="flex items-center">
