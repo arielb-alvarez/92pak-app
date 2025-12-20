@@ -113,14 +113,17 @@ import { CommonModule } from '@angular/common';
         <div class="inline-block p-6 bg-gradient-to-r from-[#06e9bb]/10 to-[#06e9bb]/5 rounded-xl border border-[#06e9bb]/20">
           <h4 class="font-bold text-lg mb-3 text-[#06e9bb]">Still have questions?</h4>
           <p class="text-gray-300 mb-4 max-w-md mx-auto">Can't find the answer you're looking for? Please reach out to our friendly support team.</p>
-          <button class="btn-secondary px-6 py-3 text-sm">
-            <span class="flex items-center justify-center gap-2">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
-              </svg>
-              Contact Support
-            </span>
-          </button>
+          <a 
+            href="https://t.me/vee92pak_manager" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary px-6 py-3 text-sm inline-flex items-center justify-center gap-2 hover:no-underline"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+            </svg>
+            Contact Support
+          </a>
         </div>
       </div>
     </section>
