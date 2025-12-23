@@ -1,4 +1,3 @@
-// src/app/services/seo.service.ts
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
@@ -12,15 +11,6 @@ export type PageType = 'home' | 'about' | 'privacy' | 'terms' | 'disclaimer' | '
 export class SeoService {
   private baseUrl = 'https://92pakworld.net';
   
-  private canonicalUrls: Record<PageType, string> = {
-    'home': `${this.baseUrl}/`,
-    'about': `${this.baseUrl}/about-us`,
-    'privacy': `${this.baseUrl}/privacy-policy`,
-    'terms': `${this.baseUrl}/terms-and-conditions`,
-    'disclaimer': `${this.baseUrl}/disclaimer`,
-    'contact': `${this.baseUrl}/contact-us`
-  };
-
   constructor(
     private meta: Meta,
     private title: Title,
@@ -29,7 +19,11 @@ export class SeoService {
   ) {}
 
   setPageSeo(page: PageType = 'home'): void {
+    // Get SEO config for the specific page
     const seoConfig = this.configService.getSeoConfig(page);
+    
+    // Get the canonical URL from the config - this is the key fix!
+    const canonicalUrl = seoConfig.canonical || `${this.baseUrl}/`;
     
     // Set title
     const title = seoConfig.title || '92 PAK Game - Real Money Earning App';
@@ -39,10 +33,7 @@ export class SeoService {
     this.meta.updateTag({ name: 'description', content: seoConfig.description || '' });
     this.meta.updateTag({ name: 'keywords', content: seoConfig.keywords || '' });
     
-    // Set canonical URL - only in browser
-    const canonicalUrl = this.canonicalUrls[page] || `${this.baseUrl}/`;
-    
-    // Use Angular Meta service which is SSR-safe
+    // Set canonical URL - using the one from config
     this.updateCanonicalUrl(canonicalUrl);
     
     // Open Graph tags
