@@ -1,6 +1,7 @@
+// src/app/services/seo.service.ts
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { ConfigService } from './config.service';
 
 export type PageType = 'home' | 'about' | 'privacy' | 'terms' | 'disclaimer' | 'contact';
@@ -15,14 +16,14 @@ export class SeoService {
     private meta: Meta,
     private title: Title,
     private configService: ConfigService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   setPageSeo(page: PageType = 'home'): void {
-    // Get SEO config for the specific page
     const seoConfig = this.configService.getSeoConfig(page);
     
-    // Get the canonical URL from the config - this is the key fix!
+    // Get the canonical URL from the config
     const canonicalUrl = seoConfig.canonical || `${this.baseUrl}/`;
     
     // Set title
@@ -33,7 +34,7 @@ export class SeoService {
     this.meta.updateTag({ name: 'description', content: seoConfig.description || '' });
     this.meta.updateTag({ name: 'keywords', content: seoConfig.keywords || '' });
     
-    // Set canonical URL - using the one from config
+    // Set canonical URL - using DOM manipulation
     this.updateCanonicalUrl(canonicalUrl);
     
     // Open Graph tags
@@ -55,19 +56,18 @@ export class SeoService {
   }
 
   updateCanonicalUrl(url: string): void {
-    // Check if we're in a browser environment
-    if (isPlatformBrowser(this.platformId)) {
-      // Remove existing canonical tag
-      const existingCanonical = this.meta.getTag('rel="canonical"');
-      if (existingCanonical) {
-        this.meta.removeTagElement(existingCanonical);
-      }
-      
-      // Add new canonical tag
-      this.meta.addTag({ rel: 'canonical', href: url });
+    // Find existing canonical link
+    let canonicalLink = this.document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    
+    if (canonicalLink) {
+      // Update existing canonical link
+      canonicalLink.setAttribute('href', url);
     } else {
-      // For SSR, use updateTag which doesn't require document
-      this.meta.updateTag({ rel: 'canonical', href: url });
+      // Create new canonical link
+      canonicalLink = this.document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      canonicalLink.setAttribute('href', url);
+      this.document.head.appendChild(canonicalLink);
     }
   }
 }

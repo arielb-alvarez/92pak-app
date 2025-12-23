@@ -120,17 +120,37 @@ export class ConfigService {
 
   // Get SEO config
   getSeoConfig(page: string = 'home'): any {
+    const baseUrl = 'https://92pakworld.net';
     const seoConfig = this.config.seo;
     
-    // Merge page-specific config with defaults
-    if (seoConfig.pages && seoConfig.pages[page]) {
+    // If config doesn't have SEO, use default
+    if (!seoConfig) {
+      const defaultConfig = this.getDefaultConfig();
       return {
-        ...seoConfig.default,
-        ...seoConfig.pages[page]
+        ...defaultConfig.seo.default,
+        canonical: this.getDefaultCanonicalUrl(page)
       };
     }
     
-    return seoConfig.default;
+    // Merge page-specific config with defaults
+    if (seoConfig.pages && seoConfig.pages[page]) {
+      const pageConfig = seoConfig.pages[page];
+      
+      // Ensure canonical exists
+      const canonical = pageConfig.canonical || this.getDefaultCanonicalUrl(page);
+      
+      return {
+        ...seoConfig.default,
+        ...pageConfig,
+        canonical: canonical  // Ensure canonical is always set
+      };
+    }
+    
+    // Return default with base URL canonical
+    return {
+      ...seoConfig.default,
+      canonical: `${baseUrl}/`
+    };
   }
 
   // Existing methods with proper return types
@@ -167,4 +187,18 @@ export class ConfigService {
       default: return ['full', 'empty', 'empty'];
     }
   }
+
+  private getDefaultCanonicalUrl(page: string): string {
+    const baseUrl = 'https://92pakworld.net';
+    const canonicalMap: Record<string, string> = {
+      'home': `${baseUrl}/`,
+      'about': `${baseUrl}/about-us`,
+      'privacy': `${baseUrl}/privacy-policy`,
+      'terms': `${baseUrl}/terms-and-conditions`,
+      'disclaimer': `${baseUrl}/disclaimer`,
+      'contact': `${baseUrl}/contact-us`
+    };
+    
+    return canonicalMap[page] || `${baseUrl}/`;
+}
 }
