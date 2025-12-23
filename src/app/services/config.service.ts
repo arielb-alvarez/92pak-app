@@ -23,6 +23,8 @@ export class ConfigService {
   }
 
   private getDefaultConfig(): AppConfig {
+    const baseUrl = 'https://92pakworld.net';
+
     return {
       seo: {
         default: {
@@ -34,7 +36,44 @@ export class ConfigService {
           siteName: '92 PAK Game',
           twitterHandle: '@92pakgame'
         },
-        pages: {}
+        pages: {
+          'home': {
+            title: '92 PAK Game - New Earning App in Pakistan 2025',
+            description: 'Download 92 PAK Game - Play and earn real money in Pakistan through exciting games and rewards.',
+            keywords: '92 PAK Game, earning app Pakistan, money making game, mobile game earnings',
+            canonical: `${baseUrl}/`
+          },
+          'about': {
+            title: 'About 92 PAK Game - Real Money Earning Platform',
+            description: 'Learn about 92 PAK Game mission, features, and commitment to providing secure gaming experiences in Pakistan.',
+            keywords: 'about 92 PAK Game, company mission, gaming platform',
+            canonical: `${baseUrl}/about-us`
+          },
+          'privacy': {
+            title: 'Privacy Policy - 92 PAK Game',
+            description: 'Read our Privacy Policy to understand how we collect, use, and protect your personal information.',
+            keywords: 'privacy policy, data protection, user privacy',
+            canonical: `${baseUrl}/privacy-policy`
+          },
+          'terms': {
+            title: 'Terms and Conditions - 92 PAK Game',
+            description: 'Review the Terms and Conditions for using 92 PAK Game real money earning platform.',
+            keywords: 'terms and conditions, user agreement, legal terms',
+            canonical: `${baseUrl}/terms-and-conditions`
+          },
+          'disclaimer': {
+            title: 'Disclaimer - 92 PAK Game',
+            description: 'Important legal disclaimer for 92 PAK Game real money gaming platform.',
+            keywords: 'disclaimer, legal disclaimer, gaming risks',
+            canonical: `${baseUrl}/disclaimer`
+          },
+          'contact': {
+            title: 'Contact Us - 92 PAK Game Support',
+            description: 'Get in touch with 92 PAK Game customer support team for assistance and inquiries.',
+            keywords: 'contact us, customer support, help center',
+            canonical: `${baseUrl}/contact-us`
+          }
+        }
       },
       app: {
         name: '92PAK',
@@ -80,19 +119,18 @@ export class ConfigService {
   }
 
   // Get SEO config
-  getSeoConfig(page?: string): any {
-    // If no page specified, return default
-    if (!page) {
-      return this.seoConfig.default;
-    }
-
-    // Try to get page-specific SEO
-    if (this.seoConfig.pages && this.seoConfig.pages[page]) {
-      return this.seoConfig.pages[page];
+  getSeoConfig(page: string = 'home'): any {
+    const seoConfig = this.config.seo;
+    
+    // Merge page-specific config with defaults
+    if (seoConfig.pages && seoConfig.pages[page]) {
+      return {
+        ...seoConfig.default,
+        ...seoConfig.pages[page]
+      };
     }
     
-    // Fallback to default
-    return this.seoConfig.default;
+    return seoConfig.default;
   }
 
   // Existing methods with proper return types
